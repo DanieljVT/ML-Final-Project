@@ -6,7 +6,7 @@ import nltk.tokenize as nltk_token
 import numpy as np
 from math import exp
 import random
-random.seed(1)
+random.seed(2)
 
 amazon_reviews = open('amazon_cells_labelled.txt', mode='r')
 imdb_reviews = open('imdb_labelled.txt', mode='r')
@@ -20,7 +20,7 @@ for file in files:
         data.append(nltk_token.word_tokenize(line))
 
 train_data = []
-train_data_size = 500
+train_data_size = 2100
 train_data = random.sample(data, train_data_size)
 data = [sentence for sentence in data if sentence not in train_data]
 valid_data = data
@@ -32,7 +32,7 @@ pos_count = 0
 for sentence in train_data:
     sentence_class = sentence[-1]
     #removing duplicate words from the list
-    sentence = set(sentence)
+    sentence = set(sentence[:-1])
     if sentence_class == '0':
         neg_count += 1
         for word in sentence:
